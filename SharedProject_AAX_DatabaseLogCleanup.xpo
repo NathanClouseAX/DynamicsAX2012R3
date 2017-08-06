@@ -1,0 +1,2391 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_DatabaseLogCleanup unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_DatabaseLogCleanup
+    PROPERTIES
+      Name                #AAX_DatabaseLogCleanup
+      Extends             #RunBaseBatch
+      Origin              #{7B0EBB00-5AC2-4F2D-A1BA-8150F6A04AAC}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #caption
+        #public ClassDescription caption()
+        #{
+        #    ClassDescription ret;
+        #
+        #    ret = "Database Log Cleanup";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #public class AAX_DatabaseLogCleanup extends RunBaseBatch
+        #{
+        #    int numDaysFramework;
+        #    int numDaysGroup;
+        #    int numDaysMain;
+        #    int numDaysMisc;
+        #    int numDaysParameter;
+        #    int numDaysReference;
+        #    int numDaysTransaction;
+        #    int numDaysTransactionHeader;
+        #    int numDaysTransactionLine;
+        #    int numDaysWorksheet;
+        #    int numDaysWorksheetHeader;
+        #    int numDaysWorksheetLine;
+        #
+        #    DialogField dialognumDaysFramework;
+        #    DialogField dialognumDaysGroup;
+        #    DialogField dialognumDaysMain;
+        #    DialogField dialognumDaysMisc;
+        #    DialogField dialognumDaysParameter;
+        #    DialogField dialognumDaysReference;
+        #    DialogField dialognumDaysTransaction;
+        #    DialogField dialognumDaysTransactionHeader;
+        #    DialogField dialognumDaysTransactionLine;
+        #    DialogField dialognumDaysWorksheet;
+        #    DialogField dialognumDaysWorksheetHeader;
+        #    DialogField dialognumDaysWorksheetLine;
+        #
+        #    #define.CurrentVersion(1)
+        #    #localmacro.CurrentList
+        #        numDaysFramework,
+        #        numDaysGroup,
+        #        numDaysMain,
+        #        numDaysMisc,
+        #        numDaysParameter,
+        #        numDaysReference,
+        #        numDaysTransaction,
+        #        numDaysTransactionHeader,
+        #        numDaysTransactionLine,
+        #        numDaysWorksheet,
+        #        numDaysWorksheetHeader,
+        #        numDaysWorksheetLine
+        #    #endmacro
+        #}
+      ENDSOURCE
+      SOURCE #dialog
+        #protected Object dialog()
+        #{
+        #    Object ret;
+        #
+        #    DialogRunBase DialogRunBase;
+        #
+        #    DialogRunBase = super();
+        #
+        #    dialognumDaysFramework                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "Delete Framework Log Entries after days","Number of Days of Framework history to keep (zero is forever)");
+        #    dialognumDaysGroup                      = dialogRunBase.addFieldValue(extendedTypeStr(Days), 120, "Delete Group Log Entries after days","Number of Days of Group history to keep (zero is forever)");
+        #    dialognumDaysMain                       = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "Delete Main Log Entries after days","Number of Days of Main history to keep (zero is forever)");
+        #    dialognumDaysMisc                       = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "Delete Misc Log Entries after days","Number of Days of Misc history to keep (zero is forever)");
+        #    dialognumDaysParameter                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "Delete Parameter Log Entries after days","Number of Days of Parameter history to keep (zero is forever)");
+        #    dialognumDaysReference                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "Delete Reference Log Entries after days","Number of Days of Reference history to keep (zero is forever)");
+        #    dialognumDaysTransaction                = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "Delete Transaction Log Entries after days","Number of Days of Transaction history to keep (zero is forever)");
+        #    dialognumDaysTransactionHeader          = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "Delete Transaction Header Log Entries after days","Number of Days of Transaction Header history to keep (zero is forever)");
+        #    dialognumDaysTransactionLine            = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "Delete Transaction Line Log Entries after days","Number of Days of Transaction Line history to keep (zero is forever)");
+        #    dialognumDaysWorksheet                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "Delete Worksheet Log Entries after days","Number of Days of Worksheet history to keep (zero is forever)");
+        #    dialognumDaysWorksheetHeader            = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "Delete Worksheet Header Log Entries after days","Number of Days of Worksheet Header history to keep (zero is forever)");
+        #    dialognumDaysWorksheetLine              = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "Delete Worksheet Line Log Entries after days","Number of Days of Worksheet Line history to keep (zero is forever)");
+        #
+        #    return DialogRunBase;
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #    boolean ret;
+        #
+        #    ret             = super();
+        #
+        #    numDaysFramework                = dialognumDaysFramework.value();
+        #    numDaysGroup                    = dialognumDaysGroup.value();
+        #    numDaysMain                     = dialognumDaysMain.value();
+        #    numDaysMisc                     = dialognumDaysMisc.value();
+        #    numDaysParameter                = dialognumDaysParameter.value();
+        #    numDaysReference                = dialognumDaysReference.value();
+        #    numDaysTransaction              = dialognumDaysTransaction.value();
+        #    numDaysTransactionHeader        = dialognumDaysTransactionHeader.value();
+        #    numDaysTransactionLine          = dialognumDaysTransactionLine.value();
+        #    numDaysWorksheet                = dialognumDaysWorksheet.value();
+        #    numDaysWorksheetHeader          = dialognumDaysWorksheetHeader.value();
+        #    numDaysWorksheetLine            = dialognumDaysWorksheetLine.value();
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #name
+        #public IdentifierName name()
+        #{
+        #    IdentifierName ret;
+        #
+        #    ret = "Database Log Cleanup";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,#CurrentList];
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysFramework
+        #public int parmNumDaysFramework(int _numDaysFramework = numDaysFramework)
+        #{
+        #    if(!prmisdefault(_numDaysFramework))
+        #    {
+        #        numDaysFramework = _numDaysFramework;
+        #    }
+        #    return numDaysFramework;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysGroup
+        #public int parmNumDaysGroup(int _numDaysGroup = numDaysGroup)
+        #{
+        #    if(!prmisdefault(_numDaysGroup))
+        #    {
+        #        numDaysGroup = _numDaysGroup;
+        #    }
+        #    return numDaysGroup;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysMain
+        #public int parmNumDaysMain(int _numDaysMain = numDaysMain)
+        #{
+        #    if(!prmisdefault(_numDaysMain))
+        #    {
+        #        numDaysMain = _numDaysMain;
+        #    }
+        #    return numDaysMain;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysMisc
+        #public int parmNumDaysMisc(int _numDaysMisc = numDaysMisc)
+        #{
+        #    if(!prmisdefault(_numDaysMisc))
+        #    {
+        #        numDaysMisc = _numDaysMisc;
+        #    }
+        #    return numDaysMisc;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysParameter
+        #public int parmNumDaysParameter(int _numDaysParameter = numDaysParameter)
+        #{
+        #    if(!prmisdefault(_numDaysParameter))
+        #    {
+        #        numDaysParameter = _numDaysParameter;
+        #    }
+        #    return numDaysParameter;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysReference
+        #public int parmNumDaysReference(int _numDaysReference = numDaysReference)
+        #{
+        #    if(!prmisdefault(_numDaysReference))
+        #    {
+        #        numDaysReference = _numDaysReference;
+        #    }
+        #    return numDaysReference;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysTransaction
+        #public int parmNumDaysTransaction(int _numDaysTransaction = numDaysTransaction)
+        #{
+        #    if(!prmisdefault(_numDaysTransaction))
+        #    {
+        #        numDaysTransaction = _numDaysTransaction;
+        #    }
+        #    return numDaysTransaction;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysTransactionHeader
+        #public int parmNumDaysTransactionHeader(int _numDaysTransactionHeader = numDaysTransactionHeader)
+        #{
+        #    if(!prmisdefault(_numDaysTransactionHeader))
+        #    {
+        #        numDaysTransactionHeader = _numDaysTransactionHeader;
+        #    }
+        #    return numDaysTransactionHeader;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysTransactionLine
+        #public int parmNumDaysTransactionLine(int _numDaysTransactionLine = numDaysTransactionLine)
+        #{
+        #    if(!prmisdefault(_numDaysTransactionLine))
+        #    {
+        #        numDaysTransactionLine = _numDaysTransactionLine;
+        #    }
+        #    return numDaysTransactionLine;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysWorksheet
+        #public int parmNumDaysWorksheet(int _numDaysWorksheet = numDaysWorksheet)
+        #{
+        #    if(!prmisdefault(_numDaysWorksheet))
+        #    {
+        #        numDaysWorksheet = _numDaysWorksheet;
+        #    }
+        #    return numDaysWorksheet;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysWorksheetHeader
+        #public int parmNumDaysWorksheetHeader(int _numDaysWorksheetHeader = numDaysWorksheetHeader)
+        #{
+        #    if(!prmisdefault(_numDaysWorksheetHeader))
+        #    {
+        #        numDaysWorksheetHeader = _numDaysWorksheetHeader;
+        #    }
+        #    return numDaysWorksheetHeader;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysWorksheetLine
+        #public int parmNumDaysWorksheetLine(int _numDaysWorksheetLine = numDaysWorksheetLine)
+        #{
+        #    if(!prmisdefault(_numDaysWorksheetLine))
+        #    {
+        #        numDaysWorksheetLine = _numDaysWorksheetLine;
+        #    }
+        #    return numDaysWorksheetLine;
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #public void run()
+        #{
+        #    DatabaseLog     databaseLog;
+        #    TreeNode        treeNode;
+        #    tableGroup      tableGroup;
+        #    SysDataBaseLog  SysDataBaseLog;
+        #    int             numDays;
+        #
+        #    while select logTable from databaseLog group by logtable
+        #    {
+        #        treeNode = treeNode::findNode('\\Data Dictionary\\Tables\\' + tableid2name(databaseLog.logTable));
+        #        if(!treeNode)
+        #        {
+        #            treeNode = treeNode::findNode('\\Data Dictionary\\Views\\' + tableid2name(databaseLog.logTable));
+        #        }
+        #        tableGroup = str2enum(tableGroup, treeNode.AOTgetProperty('TableGroup'));
+        #
+        #        switch(tableGroup)
+        #        {
+        #            case tableGroup::Framework:
+        #                numDays = this.parmNumDaysFramework();
+        #                break;
+        #            case tableGroup::Group:
+        #                numDays = this.parmNumDaysGroup();
+        #                break;
+        #            case tableGroup::Main:
+        #                numDays = this.parmNumDaysMain();
+        #                break;
+        #            case tableGroup::Miscellaneous:
+        #                numDays = this.parmNumDaysMisc();
+        #                break;
+        #            case tableGroup::Parameter:
+        #                numDays = this.parmNumDaysParameter();
+        #                break;
+        #            case tableGroup::Reference:
+        #                numDays = this.parmNumDaysReference();
+        #                break;
+        #            case tableGroup::Transaction:
+        #                numDays = this.parmNumDaysTransaction();
+        #                break;
+        #            case tableGroup::TransactionHeader:
+        #                numDays = this.parmNumDaysTransactionHeader();
+        #                break;
+        #            case tableGroup::TransactionLine:
+        #                numDays = this.parmNumDaysTransactionLine();
+        #                break;
+        #            case tableGroup::Worksheet:
+        #                numDays = this.parmNumDaysWorksheet();
+        #                break;
+        #            case tableGroup::WorksheetHeader:
+        #                numDays = this.parmNumDaysWorksheetHeader();
+        #                break;
+        #            case tableGroup::WorksheetLine:
+        #                numDays = this.parmNumDaysWorksheetLine();
+        #                break;
+        #
+        #            default:
+        #                continue;
+        #        }
+        #
+        #        //if numDays is zero, leave everything intact
+        #        if(numDays == 0)
+        #        {
+        #            continue;
+        #        }
+        #
+        #        delete_from SysDataBaseLog
+        #            where SysDataBaseLog.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-numDays)
+        #               && SysDataBaseLog.table == databaseLog.logTable;
+        #    }
+        #
+        #    //delete all logs for tables that are no longer logged ( by type )
+        #    //with a default 120 day timeout
+        #    delete_from SysDataBaseLog
+        #        notexists join databaseLog
+        #            where SysDataBaseLog.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-120)
+        #               && SysDataBaseLog.table == databaseLog.logTable
+        #               && SysDataBaseLog.LogType == databaseLog.LogType;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container packedClass)
+        #{
+        #    Version version     = runbase::getVersion(packedClass);
+        #
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version,#CurrentList] = packedClass;
+        #            break;
+        #        default:
+        #            return false;
+        #    }
+        #    return true;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #static void main(Args args)
+        #{
+        #    AAX_DatabaseLogCleanup this = new AAX_DatabaseLogCleanup();
+        #
+        #    if(this.prompt())
+        #    {
+        #        this.run();
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: MNU
+
+; Microsoft Dynamics AX Menu : SystemAdministration unloaded
+; --------------------------------------------------------------------------------
+  MNUVERSION 5
+  
+  MENU #SystemAdministration
+    PROPERTIES
+      Name                #SystemAdministration
+      Label               #@SYS334405
+      SetCompany          #Yes
+      NormalImage         #3467
+      ImageLocation       #EmbeddedResource
+      Origin              #{FACC2DF0-3622-42E9-B6B1-0EE0606E9541}
+    ENDPROPERTIES
+    
+    MENU #@SYS333846
+      PROPERTIES
+        Name                #Common
+        Label               #@SYS333846
+        NormalImage         #3495
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@SYS334407
+        PROPERTIES
+          Name                #Users
+          Label               #@SYS334407
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Users
+            MenuItemName        #SysUserInfoPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Online users
+            MenuItemName        #SysUsersOnline
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #External web users
+            MenuItemName        #SysEPParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User relations
+            MenuItemName        #DirPersonUser
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User groups
+            MenuItemName        #SysUserGroupInfo
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User profiles
+            MenuItemName        #Profiles
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User requests
+            MenuItemName        #UserRequestListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334408
+        PROPERTIES
+          Name                #DataExport/import
+          Label               #@SYS334408
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Definition groups
+            MenuItemName        #SysExpImpGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Export to
+            MenuItemType        #Action
+            MenuItemName        #SysDataExport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Import
+            MenuItemType        #Action
+            MenuItemName        #SysDataImport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #File archive
+          MenuItemName        #BankFileArchTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333856
+      PROPERTIES
+        Name                #Inquiries
+        Label               #@SYS333856
+        NormalImage         #3474
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@SYS334411
+        PROPERTIES
+          Name                #BatchJobs
+          Label               #@SYS334411
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Batch job history
+            MenuItemName        #BatchJobHistory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Batch jobs
+            MenuItemName        #BatchJob
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334412
+        PROPERTIES
+          Name                #Database
+          Label               #@SYS334412
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Database information
+            MenuItemName        #SysSqlStatus
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Database log
+            MenuItemName        #SysDatabaseLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #SQL statement trace log
+            MenuItemName        #SysTraceSQL
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334413
+        PROPERTIES
+          Name                #SynchronizationService
+          Label               #@SYS334413
+          ConfigurationKey    #ProjServerIntegration
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Integration log
+            MenuItemName        #SyncCompoundTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334414
+        PROPERTIES
+          Name                #System
+          Label               #@SYS334414
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Element usage log
+            MenuItemName        #SysUtilElementsLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334415
+        PROPERTIES
+          Name                #Users
+          Label               #@SYS334415
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #User log
+            MenuItemName        #SysUserLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333860
+      PROPERTIES
+        Name                #Reports
+        Label               #@SYS333860
+        NormalImage         #3477
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@SYS334426
+        PROPERTIES
+          Name                #Licensing
+          Label               #@SYS334426
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Named User License Counts
+            MenuItemType        #Output
+            MenuItemName        #SysUserLicenseCountReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334416
+        PROPERTIES
+          Name                #Database
+          Label               #@SYS334416
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Database log
+            MenuItemType        #Output
+            MenuItemName        #SysDatabaseLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tables
+            MenuItemType        #Output
+            MenuItemName        #SysDataAreaPrintCollections
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Size of company accounts
+            MenuItemType        #Output
+            MenuItemName        #SysCompanySize
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334417
+        PROPERTIES
+          Name                #Security
+          Label               #@SYS334417
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Online time
+            MenuItemType        #Output
+            MenuItemName        #SysUsersOnlineReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Record level security
+            MenuItemType        #Output
+            MenuItemName        #SysRecordLevelSecurity
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333865
+      PROPERTIES
+        Name                #Periodic
+        Label               #@SYS333865
+        NormalImage         #3476
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Notification clean up
+          MenuItemType        #Action
+          MenuItemName        #EventAlertCleanup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Compile application
+          MenuItemType        #Action
+          MenuItemName        #SysCompileAll
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Compile into .NET Framework CIL
+          MenuItemType        #Action
+          MenuItemName        #syscheckListitem_ciLGenerations
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Populate Enum Dictionary
+          MenuItemType        #Action
+          MenuItemName        #AAX_EnumDictionaryDump
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS334418
+        PROPERTIES
+          Name                #Database
+          Label               #@SYS334418
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Consistency check
+            MenuItemType        #Action
+            MenuItemName        #SysConsistencyCheckBase
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #SQL administration
+            MenuItemName        #SysSqlAdmin
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334419
+        PROPERTIES
+          Name                #MenuAIF
+          Label               #@SYS334419
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Queue manager
+            MenuItemName        #AifQueueManager
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #History
+            MenuItemName        #AifDocumentHistory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Exceptions
+            MenuItemName        #Exceptions
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333867
+        PROPERTIES
+          Name                #Alerts
+          Label               #@SYS333867
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Change based alerts
+            MenuItemType        #Action
+            MenuItemName        #EventCUD
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Due date alerts
+            MenuItemType        #Action
+            MenuItemName        #EventDueDate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334420
+        PROPERTIES
+          Name                #E-mailProcessing
+          Label               #@SYS334420
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail broadcast
+            MenuItemType        #Action
+            MenuItemName        #SysEmailBroadcast
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail sending status
+            MenuItemName        #SysOutgoingEmailTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Batch
+            MenuItemType        #Action
+            MenuItemName        #SysEmailDistributor
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retry schedule
+            MenuItemName        #SysEmailRetrySchedule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333869
+      PROPERTIES
+        Name                #Setup
+        Label               #@SYS333869
+        NormalImage         #3478
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #System parameters
+          MenuItemName        #SystemParameters
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Batch group
+          MenuItemName        #BatchGroup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Virtual company accounts
+          MenuItemName        #SysDataAreaVirtual
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Partitions
+          MenuItemName        #PartitionAdministration
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS334421
+        PROPERTIES
+          Name                #CopyOfSecurity
+          Label               #@SYS334421
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Assign users to roles
+            MenuItemName        #SysSecRolesEditUsers
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Security roles
+            MenuItemName        #SysSecRolesEditTasks
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Security privileges
+            MenuItemName        #SysSecTasksEditPS
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Record level security
+            MenuItemName        #SysRecordLevelSecurity
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #External roles
+            MenuItemName        #DirExternalRoles
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS334422
+          PROPERTIES
+            Name                #SegregationOfDuties
+            Label               #@SYS334422
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Segregation of duties rules
+              MenuItemName        #SysSecSegregationOfDutiesRule
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Segregation of duties conflicts
+              MenuItemName        #SysSecSegregationOfDutiesConflictsAll
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Segregation of duties unresolved conflicts
+              MenuItemName        #SysSecSegregationOfDutiesConflictsNew
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Verify compliance of user-role assignments
+              MenuItemType        #Action
+              MenuItemName        #SECuritysegregationOfDuties
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334423
+        PROPERTIES
+          Name                #CopyOfSystem
+          Label               #@SYS334423
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Client performance options
+            MenuItemName        #SysClientPerf
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #System service accounts
+            MenuItemName        #SysBusinessConnectorProxy
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Server configuration
+            MenuItemName        #SysServerConfig
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cluster configuration
+            MenuItemName        #SysClusterConfig
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Customer feedback options
+            MenuItemName        #SysSQMSettings
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail parameters
+            MenuItemName        #SysEmailParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail client constraints
+            MenuItemName        #SysEmailPopClientConstraints
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Help system parameters
+            MenuItemName        #SysHelpSystemParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modify data types
+            MenuItemName        #SysEDTSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modify invalid conditions
+            MenuItemName        #ExpressionUpgradeInvalidExpressions
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334424
+        PROPERTIES
+          Name                #CopyOfWorkflow
+          Label               #@SYS334424
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Workflow parameters
+            MenuItemName        #WorkflowParametersAdmin
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Workflow infrastructure configuration
+            MenuItemName        #WorkflowSetupWizard
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User workflows
+            MenuItemName        #UserWorkFlowConfigurationUser
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334425
+        PROPERTIES
+          Name                #CopyOfDatabase
+          Label               #@SYS334425
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Database log setup
+            MenuItemName        #SysDatabaseLogSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Select concurrency mode
+            MenuItemName        #SysOccConfiguration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modify data types
+            MenuItemName        #SYSEDTSETUP
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334426
+        PROPERTIES
+          Name                #CopyOfLicensing
+          Label               #@SYS334426
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #License configuration
+            MenuItemName        #SysConfiguration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #License information
+            MenuItemName        #SysLicenseCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334427
+        PROPERTIES
+          Name                #BusinessIntelligence
+          Label               #@SYS334427
+        ENDPROPERTIES
+        
+        MENU #@SYS334428
+          PROPERTIES
+            Name                #AnalysisServices
+            Label               #@SYS334428
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Analysis servers
+              MenuItemName        #BIOlapAdministration
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #System currency and exchange rate type
+              MenuItemName        #BISetupExchangeRates
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Time periods
+              MenuItemName        #BITimePeriodsMDX
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Date dimensions
+              MenuItemName        #BICalendarBuilder
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS334429
+          PROPERTIES
+            Name                #ReportingServices
+            Label               #@SYS334429
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Report servers
+              MenuItemName        #SRSReportingServicesServersMenuItem
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Report deployment settings
+              MenuItemName        #SRSReportDeploymentSettingsMenuItem
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334430
+        PROPERTIES
+          Name                #CopyOfChecklists
+          Label               #@SYS334430
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Initialization checklist
+            MenuItemName        #SysCheckList_Setup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Prevent startup of checklists
+            MenuItemType        #Action
+            MenuItemName        #SysCheckList_InitNoUpdate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Code upgrade checklist
+            MenuItemName        #SysCheckList_UpgradeCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Data upgrade checklist
+            MenuItemName        #SysCheckList_Upgrade
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Partition initialization checklist
+            MenuItemName        #SysCheckList_SetupPartition
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Software update checklist
+            MenuItemName        #SysCheckList_Servicing
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Code upgrade checklist for in-place upgrade
+            MenuItemName        #syscheckList_sysupdateCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Data upgrade checklist for in-place upgrade
+            MenuItemName        #SysCheckList_Update
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334431
+        PROPERTIES
+          Name                #ServicesAndAIF
+          Label               #@SYS334431
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Inbound ports
+            MenuItemName        #AifInboundPort
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Outbound ports
+            MenuItemName        #AifOutboundPort
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Value substitution maps
+            MenuItemName        #AifLookupTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Web sites
+            MenuItemName        #AifWebsites
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS4004478
+          PROPERTIES
+            Name                #PositivePayServices
+            Label               #@SYS4004478
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Outbound ports for positive pay
+              MenuItemName        #BankPositivePayFormat
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Outbound ports for payroll positive pay
+              MenuItemName        #PayrollPositivePayFormat
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Windows Azure Service Bus configuration
+            MenuItemName        #AifAzureServiceBus
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS335927
+          PROPERTIES
+            Name                #ElectronicPaymentServices
+            Label               #@SYS335927
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Outbound ports for electronic payments
+              MenuItemName        #CustVendAifPaymTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334432
+        PROPERTIES
+          Name                #EnterprisePortal
+          Label               #@SYS334432
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Enterprise Portal parameters
+            MenuItemName        #EPParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Deployments
+            MenuItemName        #EPWizard
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Publish images
+            MenuItemName        #EPPublishImages
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Web sites
+            MenuItemName        #EPWebSiteParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Collaboration workspace settings
+            MenuItemName        #CollabSiteSettings
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS60181
+        PROPERTIES
+          Name                #SearchSetup
+          Label               #@SYS60181
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Search configuration
+            MenuItemName        #SysSearchSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Update search crawler role
+            MenuItemName        #SysSearchSetupRole
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334434
+        PROPERTIES
+          Name                #FileArchiving
+          Label               #@SYS334434
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #File archiving parameters
+            MenuItemName        #BankFileArchParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #File types
+            MenuItemName        #BankFileArchFileTypeTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334413
+        PROPERTIES
+          Name                #SynchronizationService
+          Label               #@SYS334413
+          ConfigurationKey    #ProjServerIntegration
+        ENDPROPERTIES
+        
+        MENU #@RET3014
+          PROPERTIES
+            Name                #Retail
+            Label               #@RET3014
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Retail POS redeployment
+              MenuItemName        #retailredeploySelectStores
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Integration settings
+            MenuItemName        #ProjServerConfigure
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Synchronization service parameters
+            MenuItemName        #SyncParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS4007920
+        PROPERTIES
+          Name                #WindowsAppStore
+          Label               #@SYS4007920
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Windows Application Store setup
+            MenuItemName        #SysWindowsAppSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+  ENDMENU
+  
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_DatabaseLogCleanup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_DatabaseLogCleanup
+    Type: 3
+    PROPERTIES
+      Name                #AAX_DatabaseLogCleanup
+      Label               #Database Log Cleanup
+      ObjectType          #Class
+      Object              #AAX_DatabaseLogCleanup
+      RunOn               #Server
+      ConfigurationKey    #SysAdmin
+      Origin              #{D458882B-2CDA-4BBF-A630-94D7E2710D3C}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : AAX_DatabaseLogCleanup unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #AAX_DatabaseLogCleanup
+  SHARED
+  PROPERTIES
+    Name                #AAX_DatabaseLogCleanup
+    Origin              #{575C670F-C4CC-4E1E-B328-01902534ACBD}
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    GROUP #DataDictionary
+      PROPERTIES
+        Name                #DataDictionary
+        ProjectGroupType    #DataDictionary
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #Tables
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Maps
+        PROPERTIES
+          Name                #Maps
+          ProjectGroupType    #Maps
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Views
+        PROPERTIES
+          Name                #Views
+          ProjectGroupType    #Views
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #ExtendedDataTypes
+        PROPERTIES
+          Name                #ExtendedDataTypes
+          ProjectGroupType    #ExtendedDataTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #BaseEnums
+        PROPERTIES
+          Name                #BaseEnums
+          ProjectGroupType    #BaseEnums
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #LicenseCodes
+        PROPERTIES
+          Name                #LicenseCodes
+          ProjectGroupType    #LicenseCodes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #ConfigurationKeys
+        PROPERTIES
+          Name                #ConfigurationKeys
+          ProjectGroupType    #ConfigurationKeys
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #SecurityKeys
+        PROPERTIES
+          Name                #SecurityKeys
+          ProjectGroupType    #SecurityKeys
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #TableCollections
+        PROPERTIES
+          Name                #TableCollections
+          ProjectGroupType    #TableCollections
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Perspectives
+        PROPERTIES
+          Name                #Perspectives
+          ProjectGroupType    #Perspectives
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Macros
+      PROPERTIES
+        Name                #Macros
+        ProjectGroupType    #Macros
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Classes
+      PROPERTIES
+        Name                #Classes
+        ProjectGroupType    #Classes
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 1026236
+        NODETYPE 329
+        NAME #AAX_DatabaseLogCleanup
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #Forms
+      PROPERTIES
+        Name                #Forms
+        ProjectGroupType    #Forms
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Parts
+      PROPERTIES
+        Name                #Parts
+        ProjectGroupType    #Parts
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Info Parts
+        PROPERTIES
+          Name                #Info Parts
+          ProjectGroupType    #InfoParts
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Form Parts
+        PROPERTIES
+          Name                #Form Parts
+          ProjectGroupType    #FormParts
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Cues
+        PROPERTIES
+          Name                #Cues
+          ProjectGroupType    #Cues
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Cue Groups
+        PROPERTIES
+          Name                #Cue Groups
+          ProjectGroupType    #CueGroups
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #DataSets
+      PROPERTIES
+        Name                #DataSets
+        ProjectGroupType    #DataSets
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #SSRS Reports
+      PROPERTIES
+        Name                #SSRS Reports
+        ProjectGroupType    #SSRSReports
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Reports
+        PROPERTIES
+          Name                #Reports
+          ProjectGroupType    #Reports
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Style Templates
+        PROPERTIES
+          Name                #Report Style Templates
+          ProjectGroupType    #ReportStyleTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Datasources
+        PROPERTIES
+          Name                #Report Datasources
+          ProjectGroupType    #ReportDataSources
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Images
+        PROPERTIES
+          Name                #Report Images
+          ProjectGroupType    #ReportImages
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Reports
+      PROPERTIES
+        Name                #Reports
+        ProjectGroupType    #Reports
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #ReportTemplates
+        PROPERTIES
+          Name                #ReportTemplates
+          ProjectGroupType    #ReportTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #SectionTemplates
+        PROPERTIES
+          Name                #SectionTemplates
+          ProjectGroupType    #ReportSectionTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Visual Studio Projects
+      PROPERTIES
+        Name                #Visual Studio Projects
+        ProjectGroupType    #VisualStudioAXModelProjects
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Analysis Services Projects
+        PROPERTIES
+          Name                #Analysis Services Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Web Application Projects
+        PROPERTIES
+          Name                #Web Application Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Visual Basic Projects
+        PROPERTIES
+          Name                #Visual Basic Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #C Sharp Projects
+        PROPERTIES
+          Name                #C Sharp Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Dynamics AX Model Projects
+        PROPERTIES
+          Name                #Dynamics AX Model Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #ReportLibraries
+      PROPERTIES
+        Name                #ReportLibraries
+        ProjectGroupType    #ReportLibraries
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Queries
+      PROPERTIES
+        Name                #Queries
+        ProjectGroupType    #Queries
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Jobs
+      PROPERTIES
+        Name                #Jobs
+        ProjectGroupType    #Jobs
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Menus
+      PROPERTIES
+        Name                #Menus
+        ProjectGroupType    #Menus
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 16
+        UTILOBJECTID 0
+        NODETYPE 205
+        NAME #SystemAdministration
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #MenuItems
+      PROPERTIES
+        Name                #MenuItems
+        ProjectGroupType    #MenuItems
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Display
+        PROPERTIES
+          Name                #Display
+          ProjectGroupType    #Display
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Output
+        PROPERTIES
+          Name                #Output
+          ProjectGroupType    #Output
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Action
+        PROPERTIES
+          Name                #Action
+          ProjectGroupType    #Action
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 3
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #AAX_DatabaseLogCleanup
+        ENDNODE
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Web
+      PROPERTIES
+        Name                #Web
+        ProjectGroupType    #Web
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #WebForms
+        PROPERTIES
+          Name                #WebForms
+          ProjectGroupType    #WebForms
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebReports
+        PROPERTIES
+          Name                #WebReports
+          ProjectGroupType    #
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebMenuItems
+        PROPERTIES
+          Name                #WebMenuItems
+          ProjectGroupType    #WebMenuItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #URLs
+          PROPERTIES
+            Name                #URLs
+            ProjectGroupType    #WebUrlMenuItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Actions
+          PROPERTIES
+            Name                #Actions
+            ProjectGroupType    #WebActionMenuItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #WebContent
+        PROPERTIES
+          Name                #WebContent
+          ProjectGroupType    #WebContentItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #Display
+          PROPERTIES
+            Name                #Display
+            ProjectGroupType    #WebDisplayContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Output
+          PROPERTIES
+            Name                #Output
+            ProjectGroupType    #WebOutputContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Managed
+          PROPERTIES
+            Name                #Managed
+            ProjectGroupType    #WebManagedContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #WebMenus
+        PROPERTIES
+          Name                #WebMenus
+          ProjectGroupType    #WebMenus
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebFiles
+        PROPERTIES
+          Name                #WebFiles
+          ProjectGroupType    #WebFiles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #WebParts
+          PROPERTIES
+            Name                #WebParts
+            ProjectGroupType    #WebWebParts
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #SiteDefinitions
+          PROPERTIES
+            Name                #SiteDefinitions
+            ProjectGroupType    #WebSiteDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #SiteTemplates
+          PROPERTIES
+            Name                #SiteTemplates
+            ProjectGroupType    #WebSiteTemps
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #PageDefinitions
+          PROPERTIES
+            Name                #PageDefinitions
+            ProjectGroupType    #WebPageDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #ListDefinitions
+          PROPERTIES
+            Name                #ListDefinitions
+            ProjectGroupType    #WebListDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #StaticFiles
+          PROPERTIES
+            Name                #StaticFiles
+            ProjectGroupType    #WebStaticFiles
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #WebControls
+          PROPERTIES
+            Name                #WebControls
+            ProjectGroupType    #WebControls
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #Weblets
+        PROPERTIES
+          Name                #Weblets
+          ProjectGroupType    #WebletItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebModules
+        PROPERTIES
+          Name                #WebModules
+          ProjectGroupType    #WebModules
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Services
+      PROPERTIES
+        Name                #Services
+        ProjectGroupType    #Services
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Service Groups
+      PROPERTIES
+        Name                #Service Groups
+        ProjectGroupType    #ServiceGroups
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Workflow
+      PROPERTIES
+        Name                #Workflow
+        ProjectGroupType    #Workflow
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #WorkflowCategories
+        PROPERTIES
+          Name                #WorkflowCategories
+          ProjectGroupType    #WorkflowCategories
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Approvals
+        PROPERTIES
+          Name                #Approvals
+          ProjectGroupType    #WorkflowApprovals
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Tasks
+        PROPERTIES
+          Name                #Tasks
+          ProjectGroupType    #WorkflowTasks
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Automated Tasks
+        PROPERTIES
+          Name                #Automated Tasks
+          ProjectGroupType    #WorkflowAutomatedTasks
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Workflow Types
+        PROPERTIES
+          Name                #Workflow Types
+          ProjectGroupType    #WorkflowTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Providers
+        PROPERTIES
+          Name                #Providers
+          ProjectGroupType    #WorkflowProviders
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Security
+      PROPERTIES
+        Name                #Security
+        ProjectGroupType    #Security
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Code Permissions
+        PROPERTIES
+          Name                #Code Permissions
+          ProjectGroupType    #SecurityCodePermissions
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Privileges
+        PROPERTIES
+          Name                #Privileges
+          ProjectGroupType    #SecurityPrivileges
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Duties
+        PROPERTIES
+          Name                #Duties
+          ProjectGroupType    #SecurityDuties
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Roles
+        PROPERTIES
+          Name                #Roles
+          ProjectGroupType    #SecurityRoles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Process Cycles
+        PROPERTIES
+          Name                #Process Cycles
+          ProjectGroupType    #SecurityProcessCycles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Policies
+        PROPERTIES
+          Name                #Policies
+          ProjectGroupType    #SecurityPolicies
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Label Files
+      PROPERTIES
+        Name                #Label Files
+        ProjectGroupType    #LabelFiles
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Resources
+      PROPERTIES
+        Name                #Resources
+        ProjectGroupType    #Resources
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #References
+      PROPERTIES
+        Name                #References
+        ProjectGroupType    #References
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Help Document Sets
+      PROPERTIES
+        Name                #Help Document Sets
+        ProjectGroupType    #HelpDocumentSets
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #System Documentation
+      PROPERTIES
+        Name                #System Documentation
+        ProjectGroupType    #All
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Reserved Words
+        PROPERTIES
+          Name                #Reserved Words
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Function
+        PROPERTIES
+          Name                #Function
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Types
+        PROPERTIES
+          Name                #Types
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Enums
+        PROPERTIES
+          Name                #Enums
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Classes
+        PROPERTIES
+          Name                #Classes
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+  ENDPROJECT
+  
+
+***Element: END

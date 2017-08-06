@@ -1,0 +1,921 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : _AAX_Project_Template unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #_AAX_Project_Template
+  SHARED
+  PROPERTIES
+    Name                #_AAX_Project_Template
+    Origin              #{F34C86D5-40C7-4321-B5A0-C1650F570769}
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    GROUP #DataDictionary
+      PROPERTIES
+        Name                #DataDictionary
+        ProjectGroupType    #DataDictionary
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #Tables
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Maps
+        PROPERTIES
+          Name                #Maps
+          ProjectGroupType    #Maps
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Views
+        PROPERTIES
+          Name                #Views
+          ProjectGroupType    #Views
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #ExtendedDataTypes
+        PROPERTIES
+          Name                #ExtendedDataTypes
+          ProjectGroupType    #ExtendedDataTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #BaseEnums
+        PROPERTIES
+          Name                #BaseEnums
+          ProjectGroupType    #BaseEnums
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #LicenseCodes
+        PROPERTIES
+          Name                #LicenseCodes
+          ProjectGroupType    #LicenseCodes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #ConfigurationKeys
+        PROPERTIES
+          Name                #ConfigurationKeys
+          ProjectGroupType    #ConfigurationKeys
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #SecurityKeys
+        PROPERTIES
+          Name                #SecurityKeys
+          ProjectGroupType    #SecurityKeys
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #TableCollections
+        PROPERTIES
+          Name                #TableCollections
+          ProjectGroupType    #TableCollections
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Perspectives
+        PROPERTIES
+          Name                #Perspectives
+          ProjectGroupType    #Perspectives
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Macros
+      PROPERTIES
+        Name                #Macros
+        ProjectGroupType    #Macros
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Classes
+      PROPERTIES
+        Name                #Classes
+        ProjectGroupType    #Classes
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Forms
+      PROPERTIES
+        Name                #Forms
+        ProjectGroupType    #Forms
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Parts
+      PROPERTIES
+        Name                #Parts
+        ProjectGroupType    #Parts
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Info Parts
+        PROPERTIES
+          Name                #Info Parts
+          ProjectGroupType    #InfoParts
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Form Parts
+        PROPERTIES
+          Name                #Form Parts
+          ProjectGroupType    #FormParts
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Cues
+        PROPERTIES
+          Name                #Cues
+          ProjectGroupType    #Cues
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Cue Groups
+        PROPERTIES
+          Name                #Cue Groups
+          ProjectGroupType    #CueGroups
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #DataSets
+      PROPERTIES
+        Name                #DataSets
+        ProjectGroupType    #DataSets
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #SSRS Reports
+      PROPERTIES
+        Name                #SSRS Reports
+        ProjectGroupType    #SSRSReports
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Reports
+        PROPERTIES
+          Name                #Reports
+          ProjectGroupType    #Reports
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Style Templates
+        PROPERTIES
+          Name                #Report Style Templates
+          ProjectGroupType    #ReportStyleTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Datasources
+        PROPERTIES
+          Name                #Report Datasources
+          ProjectGroupType    #ReportDataSources
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Images
+        PROPERTIES
+          Name                #Report Images
+          ProjectGroupType    #ReportImages
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Reports
+      PROPERTIES
+        Name                #Reports
+        ProjectGroupType    #Reports
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #ReportTemplates
+        PROPERTIES
+          Name                #ReportTemplates
+          ProjectGroupType    #ReportTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #SectionTemplates
+        PROPERTIES
+          Name                #SectionTemplates
+          ProjectGroupType    #ReportSectionTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Visual Studio Projects
+      PROPERTIES
+        Name                #Visual Studio Projects
+        ProjectGroupType    #VisualStudioAXModelProjects
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Analysis Services Projects
+        PROPERTIES
+          Name                #Analysis Services Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Web Application Projects
+        PROPERTIES
+          Name                #Web Application Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Visual Basic Projects
+        PROPERTIES
+          Name                #Visual Basic Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #C Sharp Projects
+        PROPERTIES
+          Name                #C Sharp Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Dynamics AX Model Projects
+        PROPERTIES
+          Name                #Dynamics AX Model Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #ReportLibraries
+      PROPERTIES
+        Name                #ReportLibraries
+        ProjectGroupType    #ReportLibraries
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Queries
+      PROPERTIES
+        Name                #Queries
+        ProjectGroupType    #Queries
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Jobs
+      PROPERTIES
+        Name                #Jobs
+        ProjectGroupType    #Jobs
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Menus
+      PROPERTIES
+        Name                #Menus
+        ProjectGroupType    #Menus
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #MenuItems
+      PROPERTIES
+        Name                #MenuItems
+        ProjectGroupType    #MenuItems
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Display
+        PROPERTIES
+          Name                #Display
+          ProjectGroupType    #Display
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Output
+        PROPERTIES
+          Name                #Output
+          ProjectGroupType    #Output
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Action
+        PROPERTIES
+          Name                #Action
+          ProjectGroupType    #Action
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Web
+      PROPERTIES
+        Name                #Web
+        ProjectGroupType    #Web
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #WebForms
+        PROPERTIES
+          Name                #WebForms
+          ProjectGroupType    #WebForms
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebReports
+        PROPERTIES
+          Name                #WebReports
+          ProjectGroupType    #
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebMenuItems
+        PROPERTIES
+          Name                #WebMenuItems
+          ProjectGroupType    #WebMenuItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #URLs
+          PROPERTIES
+            Name                #URLs
+            ProjectGroupType    #WebUrlMenuItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Actions
+          PROPERTIES
+            Name                #Actions
+            ProjectGroupType    #WebActionMenuItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #WebContent
+        PROPERTIES
+          Name                #WebContent
+          ProjectGroupType    #WebContentItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #Display
+          PROPERTIES
+            Name                #Display
+            ProjectGroupType    #WebDisplayContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Output
+          PROPERTIES
+            Name                #Output
+            ProjectGroupType    #WebOutputContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Managed
+          PROPERTIES
+            Name                #Managed
+            ProjectGroupType    #WebManagedContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #WebMenus
+        PROPERTIES
+          Name                #WebMenus
+          ProjectGroupType    #WebMenus
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebFiles
+        PROPERTIES
+          Name                #WebFiles
+          ProjectGroupType    #WebFiles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #WebParts
+          PROPERTIES
+            Name                #WebParts
+            ProjectGroupType    #WebWebParts
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #SiteDefinitions
+          PROPERTIES
+            Name                #SiteDefinitions
+            ProjectGroupType    #WebSiteDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #SiteTemplates
+          PROPERTIES
+            Name                #SiteTemplates
+            ProjectGroupType    #WebSiteTemps
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #PageDefinitions
+          PROPERTIES
+            Name                #PageDefinitions
+            ProjectGroupType    #WebPageDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #ListDefinitions
+          PROPERTIES
+            Name                #ListDefinitions
+            ProjectGroupType    #WebListDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #StaticFiles
+          PROPERTIES
+            Name                #StaticFiles
+            ProjectGroupType    #WebStaticFiles
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #WebControls
+          PROPERTIES
+            Name                #WebControls
+            ProjectGroupType    #WebControls
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #Weblets
+        PROPERTIES
+          Name                #Weblets
+          ProjectGroupType    #WebletItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebModules
+        PROPERTIES
+          Name                #WebModules
+          ProjectGroupType    #WebModules
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Services
+      PROPERTIES
+        Name                #Services
+        ProjectGroupType    #Services
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Service Groups
+      PROPERTIES
+        Name                #Service Groups
+        ProjectGroupType    #ServiceGroups
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Workflow
+      PROPERTIES
+        Name                #Workflow
+        ProjectGroupType    #Workflow
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #WorkflowCategories
+        PROPERTIES
+          Name                #WorkflowCategories
+          ProjectGroupType    #WorkflowCategories
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Approvals
+        PROPERTIES
+          Name                #Approvals
+          ProjectGroupType    #WorkflowApprovals
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Tasks
+        PROPERTIES
+          Name                #Tasks
+          ProjectGroupType    #WorkflowTasks
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Automated Tasks
+        PROPERTIES
+          Name                #Automated Tasks
+          ProjectGroupType    #WorkflowAutomatedTasks
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Workflow Types
+        PROPERTIES
+          Name                #Workflow Types
+          ProjectGroupType    #WorkflowTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Providers
+        PROPERTIES
+          Name                #Providers
+          ProjectGroupType    #WorkflowProviders
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Security
+      PROPERTIES
+        Name                #Security
+        ProjectGroupType    #Security
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Code Permissions
+        PROPERTIES
+          Name                #Code Permissions
+          ProjectGroupType    #SecurityCodePermissions
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Privileges
+        PROPERTIES
+          Name                #Privileges
+          ProjectGroupType    #SecurityPrivileges
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Duties
+        PROPERTIES
+          Name                #Duties
+          ProjectGroupType    #SecurityDuties
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Roles
+        PROPERTIES
+          Name                #Roles
+          ProjectGroupType    #SecurityRoles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Process Cycles
+        PROPERTIES
+          Name                #Process Cycles
+          ProjectGroupType    #SecurityProcessCycles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Policies
+        PROPERTIES
+          Name                #Policies
+          ProjectGroupType    #SecurityPolicies
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Label Files
+      PROPERTIES
+        Name                #Label Files
+        ProjectGroupType    #LabelFiles
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Resources
+      PROPERTIES
+        Name                #Resources
+        ProjectGroupType    #Resources
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #References
+      PROPERTIES
+        Name                #References
+        ProjectGroupType    #References
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Help Document Sets
+      PROPERTIES
+        Name                #Help Document Sets
+        ProjectGroupType    #HelpDocumentSets
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #System Documentation
+      PROPERTIES
+        Name                #System Documentation
+        ProjectGroupType    #All
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Reserved Words
+        PROPERTIES
+          Name                #Reserved Words
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Function
+        PROPERTIES
+          Name                #Function
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Types
+        PROPERTIES
+          Name                #Types
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Enums
+        PROPERTIES
+          Name                #Enums
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Classes
+        PROPERTIES
+          Name                #Classes
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+  ENDPROJECT
+  
+
+***Element: END

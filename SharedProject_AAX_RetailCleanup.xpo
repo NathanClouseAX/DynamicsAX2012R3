@@ -1,0 +1,3292 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_RetailDownloadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_RetailDownloadSessionCleaner
+    PROPERTIES
+      Name                #AAX_RetailDownloadSessionCleaner
+      Extends             #RunBaseBatch
+      Origin              #{077F27B4-EF39-40B0-B0B7-ADABE1FF6E9A}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #class AAX_RetailDownloadSessionCleaner  extends RunBaseBatch
+        #{
+        #    QueryRun query;
+        #
+        #    #DEFINE.CurrentVersion(1)
+        #
+        #    //#LOCALMACRO.CurrentList
+        #    //#ENDMACRO
+        #}
+      ENDSOURCE
+      SOURCE #deleteDownloadSessions
+        #private void deleteDownloadSessions()
+        #{
+        #    RetailCDXDownloadSessionDataStore RetailCDXDownloadSessionDataStore;
+        #    //RetailCDXDownloadSession RetailCDXDownloadSession;
+        #
+        #    RetailCDXDownloadSessionDataStore.selectForUpdate(true);
+        #    query.reset();
+        #    query.setRecord(RetailCDXDownloadSessionDataStore);
+        #
+        #    while (query.next())
+        #    {
+        #        ttsbegin;
+        #
+        #        RetailCDXDownloadSessionDataStore.delete();
+        #
+        #        ttscommit;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #
+        #    return super();
+        #}
+      ENDSOURCE
+      SOURCE #initParmDefault
+        #/// <summary>
+        #///    Initializes the internal variables.
+        #/// </summary>
+        #/// <remarks>
+        #///    This method is called when no <c>SysLastValue</c> record can be found when calling the
+        #///    <c>SysLastValue.GetLast</c> method. Remember to call the <c>super</c> method.
+        #/// </remarks>
+        #void initParmDefault()
+        #{
+        #    ;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #mustLoadSaveQuery
+        #/// <summary>
+        #///    Determines whether the last query must be loaded and saved when you leave the form. Called from the
+        #///    <c>SysQueryForm</c> class.
+        #/// </summary>
+        #/// <returns>
+        #///    Always returns false.
+        #/// </returns>
+        #public boolean mustLoadSaveQuery()
+        #{
+        #    return false;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #void new()
+        #{
+        #    ;
+        #    super();
+        #    query = new QueryRun(querystr(AAX_RetailCDXDownloadSessionCleanup));
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,query.pack()];
+        #}
+      ENDSOURCE
+      SOURCE #queryRun
+        #/// <summary>
+        #///    Returns the <c>QueryRun</c> class, which is used by the <c>queryPrompt</c> method
+        #/// </summary>
+        #/// <returns>
+        #///    The <c>QueryRun</c> class, which is used by the <c>queryPrompt</c> method.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used if a query prompt is in the dialog and if a select menu item is added to a
+        #///    dialog. Do not create the instance of the <c>QueryRun</c> class when this method is called. Do it
+        #///    in the <c>unpack</c> method and the <c>initParmDefault</c> method, or in the <c>init</c> method.
+        #/// </remarks>
+        #public QueryRun queryRun()
+        #{
+        #    return query;
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Contains the code that does the actual job of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    super();
+        #
+        #    this.deleteDownloadSessions();
+        #
+        #}
+      ENDSOURCE
+      SOURCE #runsImpersonated
+        #/// <summary>
+        #///    Determines whether the batch task is run on the server or on a client.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the task is run on the server; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    Your classes that extend <c>RunBaseBatch</c> must override the <c>runsImpersonated</c> method and
+        #///    return false, if you want those tasks to run on a client.
+        #/// </remarks>
+        #public boolean runsImpersonated()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #showQueryValues
+        #/// <summary>
+        #///    Determines whether a Select button is to be added to the dialog. If you change the return value to
+        #///    true, the button will be added.
+        #/// </summary>
+        #/// <returns>
+        #///    false by default.
+        #/// </returns>
+        #/// <remarks>
+        #///    If you click this button, it will show the query form. Therefore, the <c>queryRun</c> method has to
+        #///    return a valid <c>queryRun</c> value.
+        #/// </remarks>
+        #public boolean showQueryValues()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container _packedClass)
+        #{
+        #    Integer     version     = RunBase::getVersion(_packedClass);
+        #    container       packedQuery;
+        #;
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version, packedQuery] = _packedClass;
+        #            if (packedQuery)
+        #                query = new QueryRun(packedQuery);
+        #            break;
+        #
+        #        default :
+        #            return false;
+        #    }
+        #
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #client server static ClassDescription description()
+        #{
+        #    //todo replace with label
+        #    return "Retail Download Session Cleanup";
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #static void main(Args _args)
+        #{
+        #    AAX_RetailDownloadSessionCleaner AAX_RetailDownloadSessionCleaner;
+        #    ;
+        #
+        #    AAX_RetailDownloadSessionCleaner = new AAX_RetailDownloadSessionCleaner();
+        #
+        #    if (AAX_RetailDownloadSessionCleaner.prompt())
+        #        AAX_RetailDownloadSessionCleaner.run();
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_RetailUploadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_RetailUploadSessionCleaner
+    PROPERTIES
+      Name                #AAX_RetailUploadSessionCleaner
+      Extends             #RunBaseBatch
+      Origin              #{11D4B569-4C67-472B-9838-E8761A828028}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #class AAX_RetailUploadSessionCleaner  extends RunBaseBatch
+        #{
+        #    QueryRun query;
+        #
+        #    #DEFINE.CurrentVersion(1)
+        #
+        #    //#LOCALMACRO.CurrentList
+        #    //#ENDMACRO
+        #}
+      ENDSOURCE
+      SOURCE #deleteUploadSessions
+        #private void deleteUploadSessions()
+        #{
+        #    RetailCDXUploadSession RetailCDXUploadSession;
+        #
+        #    RetailCDXUploadSession.selectForUpdate(true);
+        #    query.reset();
+        #    query.setRecord(RetailCDXUploadSession);
+        #
+        #    while (query.next())
+        #    {
+        #        if(RetailCDXUploadSession.Status == RetailCDXUploadSessionStatus::Applied ||
+        #           RetailCDXUploadSession.Status == RetailCDXUploadSessionStatus::Canceled)
+        #        {
+        #            ttsbegin;
+        #
+        #            RetailCDXUploadSession.delete();
+        #
+        #            ttscommit;
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #
+        #    return super();
+        #}
+      ENDSOURCE
+      SOURCE #initParmDefault
+        #/// <summary>
+        #///    Initializes the internal variables.
+        #/// </summary>
+        #/// <remarks>
+        #///    This method is called when no <c>SysLastValue</c> record can be found when calling the
+        #///    <c>SysLastValue.GetLast</c> method. Remember to call the <c>super</c> method.
+        #/// </remarks>
+        #void initParmDefault()
+        #{
+        #    ;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #mustLoadSaveQuery
+        #/// <summary>
+        #///    Determines whether the last query must be loaded and saved when you leave the form. Called from the
+        #///    <c>SysQueryForm</c> class.
+        #/// </summary>
+        #/// <returns>
+        #///    Always returns false.
+        #/// </returns>
+        #public boolean mustLoadSaveQuery()
+        #{
+        #    return false;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #void new()
+        #{
+        #    ;
+        #    super();
+        #    query = new QueryRun(querystr(AAX_RetailCDXUploadSessionCleanup));
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,query.pack()];
+        #}
+      ENDSOURCE
+      SOURCE #queryRun
+        #/// <summary>
+        #///    Returns the <c>QueryRun</c> class, which is used by the <c>queryPrompt</c> method
+        #/// </summary>
+        #/// <returns>
+        #///    The <c>QueryRun</c> class, which is used by the <c>queryPrompt</c> method.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used if a query prompt is in the dialog and if a select menu item is added to a
+        #///    dialog. Do not create the instance of the <c>QueryRun</c> class when this method is called. Do it
+        #///    in the <c>unpack</c> method and the <c>initParmDefault</c> method, or in the <c>init</c> method.
+        #/// </remarks>
+        #public QueryRun queryRun()
+        #{
+        #    return query;
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Contains the code that does the actual job of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    super();
+        #
+        #    this.deleteUploadSessions();
+        #
+        #}
+      ENDSOURCE
+      SOURCE #runsImpersonated
+        #/// <summary>
+        #///    Determines whether the batch task is run on the server or on a client.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the task is run on the server; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    Your classes that extend <c>RunBaseBatch</c> must override the <c>runsImpersonated</c> method and
+        #///    return false, if you want those tasks to run on a client.
+        #/// </remarks>
+        #public boolean runsImpersonated()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #showQueryValues
+        #/// <summary>
+        #///    Determines whether a Select button is to be added to the dialog. If you change the return value to
+        #///    true, the button will be added.
+        #/// </summary>
+        #/// <returns>
+        #///    false by default.
+        #/// </returns>
+        #/// <remarks>
+        #///    If you click this button, it will show the query form. Therefore, the <c>queryRun</c> method has to
+        #///    return a valid <c>queryRun</c> value.
+        #/// </remarks>
+        #public boolean showQueryValues()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container _packedClass)
+        #{
+        #    Integer     version     = RunBase::getVersion(_packedClass);
+        #    container       packedQuery;
+        #;
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version, packedQuery] = _packedClass;
+        #            if (packedQuery)
+        #                query = new QueryRun(packedQuery);
+        #            break;
+        #
+        #        default :
+        #            return false;
+        #    }
+        #
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #client server static ClassDescription description()
+        #{
+        #    //todo replace with label
+        #    return "Retail Upload Session Cleanup";
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #static void main(Args _args)
+        #{
+        #    AAX_RetailUploadSessionCleaner AAX_RetailUploadSessionCleaner;
+        #    ;
+        #
+        #    AAX_RetailUploadSessionCleaner = new AAX_RetailUploadSessionCleaner();
+        #
+        #    if (AAX_RetailUploadSessionCleaner.prompt())
+        #        AAX_RetailUploadSessionCleaner.run();
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: QUE
+
+; Microsoft Dynamics AX Query: AAX_RetailCDXDownloadSessionCleanup unloaded
+; --------------------------------------------------------------------------------
+VERSION 31
+
+QUERY #AAX_RetailCDXDownloadSessionCleanup
+  PROPERTIES
+    Name                #AAX_RetailCDXDownloadSessionCleanup
+    Version             #92
+    NextUniqueId        #1003
+    Origin              #{6042D65E-2934-4D15-A6B7-19B33EA0F563}
+  ENDPROPERTIES
+  
+  METHODS
+    SOURCE #classDeclaration
+      #public class QueryRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  BLOCKS
+    BLOCK #RetailCDXDownloadSessionDataStore
+      PROPERTIES
+        Name                #RetailCDXDownloadSessionDataStore
+        Table               #RetailCDXDownloadSessionDataStore
+        UniqueId            #1002
+        FetchMode           #1:1
+      ENDPROPERTIES
+      
+      FIELDLIST
+        PROPERTIES
+        ENDPROPERTIES
+        
+      ENDFIELDLIST
+      SORTING
+      ENDSORTING
+      LINES
+        LINE #Status
+        PROPERTIES
+          Name                #Status
+          Table               #RetailCDXDownloadSessionDataStore
+          Field               #Status
+        ENDPROPERTIES
+        
+        LINE #DateApplied
+        PROPERTIES
+          Name                #DateApplied
+          Table               #RetailCDXDownloadSessionDataStore
+          Field               #DateApplied
+        ENDPROPERTIES
+        
+      ENDLINES
+      BLOCKS
+      ENDBLOCKS
+      GROUPBY
+      ENDGROUPBY
+      HAVING
+      ENDHAVING
+      ORDERBY
+      ENDORDERBY
+    ENDBLOCK
+  ENDBLOCKS
+  DEPENDENTS
+  ENDDEPENDENTS
+  COMPOSITEQUERIES
+  ENDCOMPOSITEQUERIES
+ENDQUERY
+
+
+***Element: QUE
+
+; Microsoft Dynamics AX Query: AAX_RetailCDXUploadSessionCleanup unloaded
+; --------------------------------------------------------------------------------
+VERSION 31
+
+QUERY #AAX_RetailCDXUploadSessionCleanup
+  PROPERTIES
+    Name                #AAX_RetailCDXUploadSessionCleanup
+    Version             #107
+    NextUniqueId        #1003
+    Origin              #{834A3562-869E-42CA-A91D-196446E935D7}
+  ENDPROPERTIES
+  
+  METHODS
+    SOURCE #classDeclaration
+      #public class QueryRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  BLOCKS
+    BLOCK #RetailCDXUploadSession
+      PROPERTIES
+        Name                #RetailCDXUploadSession
+        Table               #RetailCDXUploadSession
+        UniqueId            #1002
+        FetchMode           #1:1
+      ENDPROPERTIES
+      
+      FIELDLIST
+        PROPERTIES
+        ENDPROPERTIES
+        
+      ENDFIELDLIST
+      SORTING
+      ENDSORTING
+      LINES
+        LINE #Status
+        PROPERTIES
+          Name                #Status
+          Table               #RetailCDXUploadSession
+          Field               #Status
+        ENDPROPERTIES
+        
+        LINE #DateUploaded
+        PROPERTIES
+          Name                #DateUploaded
+          Table               #RetailCDXUploadSession
+          Field               #DateUploaded
+        ENDPROPERTIES
+        
+      ENDLINES
+      BLOCKS
+      ENDBLOCKS
+      GROUPBY
+      ENDGROUPBY
+      HAVING
+      ENDHAVING
+      ORDERBY
+      ENDORDERBY
+    ENDBLOCK
+  ENDBLOCKS
+  DEPENDENTS
+  ENDDEPENDENTS
+  COMPOSITEQUERIES
+  ENDCOMPOSITEQUERIES
+ENDQUERY
+
+
+***Element: MNU
+
+; Microsoft Dynamics AX Menu : RetailMain unloaded
+; --------------------------------------------------------------------------------
+  MNUVERSION 5
+  
+  MENU #RetailMain
+    PROPERTIES
+      Name                #RetailMain
+      Label               #@RET3014
+      ConfigurationKey    #Retail
+      SetCompany          #Yes
+      NormalImage         #12039
+      ImageLocation       #EmbeddedResource
+      Origin              #{334E25CC-EF15-4D12-9C4D-B825ECFA1F0F}
+    ENDPROPERTIES
+    
+    MENU #@SYS26806
+      PROPERTIES
+        Name                #Common
+        Label               #@SYS26806
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Assortments
+          MenuItemName        #RetailAssortmentListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Workers
+          MenuItemName        #HcmWorkerListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@RET6065
+        PROPERTIES
+          Name                #RetailChannels
+          Label               #@RET6065
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Retail stores
+            MenuItemName        #RetailStoreTableListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Online stores
+            MenuItemName        #RetailSPOnlineStoreListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Online marketplaces
+            MenuItemName        #RetailOnlineMarketplaceListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Call centers
+            MenuItemName        #RetailMCRChannelListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@REX1128
+        PROPERTIES
+          Name                #Kits
+          Label               #@REX1128
+          ConfigurationKey    #Retail
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Product kits
+            MenuItemName        #RetailKitlistPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Released product kits
+            MenuItemName        #EcoResKitsPerCompanyListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Kit orders
+            MenuItemName        #RetailKitAssemblyListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334249
+        PROPERTIES
+          Name                #Catalogs
+          Label               #@SYS334249
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Catalogs
+            MenuItemName        #RetailCatalogListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS103123
+        PROPERTIES
+          Name                #Products
+          Label               #@SYS103123
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Released products by category
+            MenuItemName        #retailreleasedProductsByCategory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Products by category
+            MenuItemName        #RetailproductsbyCategory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET260045
+        PROPERTIES
+          Name                #Pricinganddiscounts
+          Label               #@RET260045
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Discounts
+            MenuItemName        #RetailDiscountOffer
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Mix and match discounts
+            MenuItemName        #RetailDiscountMixAndMatch
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Quantity discounts
+            MenuItemName        #RetailDiscountMultibuy
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Threshold discounts
+            MenuItemName        #RetailDiscountThreshold
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Price adjustments
+            MenuItemName        #RetailDiscountPromotion
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET806
+        PROPERTIES
+          Name                #ReplenishmentMenu
+          Label               #@RET806
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Buyer's push
+            MenuItemName        #RetailBuyersPush
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cross docking
+            MenuItemName        #RetailCrossDock
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Purchase orders
+            MenuItemName        #PurchTableListPageOpen
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET4355
+        PROPERTIES
+          Name                #Loyalty
+          Label               #@RET4355
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Loyalty schemes
+            MenuItemName        #RetailLoyaltySchemesListPage2
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Loyalty cards
+            MenuItemName        #RetailLoyaltyCardListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333856
+      PROPERTIES
+        Name                #InqMenu
+        Label               #@SYS333856
+        NormalImage         #3474
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Retail store transactions
+          MenuItemName        #RetailRetailStoreTransactionTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Online store transactions
+          MenuItemName        #RetailOnlineStoreTransactionTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Retail sales
+          MenuItemName        #RetailSales
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Shifts
+          MenuItemName        #RetailPosBatchTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Posted statements
+          MenuItemName        #RetailStatementJour
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Credit memos
+          MenuItemName        #RetailCreditVoucherTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Gift cards
+          MenuItemName        #RetailGiftCardTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Retail channel price groups
+          MenuItemName        #RetailPriceDiscGroupChannels
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Catalog price groups
+          MenuItemName        #RetailPriceDiscGroupCatalogs
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Affiliation price groups
+          MenuItemName        #RetailPriceDiscGroupAffiliations
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Pricing simulator
+          MenuItemName        #RetailPricingSimulator
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #All fiscal documents
+          MenuItemName        #FiscalDocumentListPageRetail_BR
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Electronic fiscal documents with unknown status
+          MenuItemName        #RetailEFDocumentToBeInquired_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Manage electronic fiscal documents with an unknown status
+          MenuItemType        #Action
+          MenuItemName        #RetailEFDocActionTakerController_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Fiscal receipts
+          MenuItemName        #RetailFiscalReceiptList_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Z reports
+          MenuItemName        #RetailZReportListPage_BR
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Fiscal printers
+          MenuItemName        #RetailFiscalPrinter_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #EFT payments with failed capture
+          MenuItemName        #RetailTransactionPaymentTransCaptureFail
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Tax authority messages
+          MenuItemName        #EFRTAxAuthorityMessages_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@REX4160504
+        PROPERTIES
+          Name                #CommerceDataExchange
+          Label               #@REX4160504
+          ConfigurationKey    #Retail
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Async Server connection status
+            MenuItemName        #RetailCDXDataStoreheartbeatLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Download sessions
+            MenuItemName        #RetailCDXDownloadSessionDataStore
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Upload sessions
+            MenuItemName        #RetailCDXUploadSession
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Async Server (previous version) status messages
+            MenuItemName        #RetailConnSCMonMessages
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS8782
+      PROPERTIES
+        Name                #Periodic
+        Label               #@SYS8782
+        NormalImage         #3476
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Mass update worksheet
+          MenuItemName        #RetailMassUpdateWorksheet
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Process assortments
+          MenuItemType        #Action
+          MenuItemName        #RetailAssortmentExploderJobScheduler
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Update listing status
+          MenuItemType        #Action
+          MenuItemName        #RetailListingStatusJob
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Category price rule groups
+          MenuItemName        #RetailCategoryPriceRuleGroup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Category price rules
+          MenuItemName        #RetailCategoryPriceRule
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Product availability
+          MenuItemType        #Action
+          MenuItemName        #RetailInventAvailabilityCalcScheduler
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Generate related products
+          MenuItemType        #Action
+          MenuItemName        #RetailRelatedProductsJobScheduler
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Process delivery modes
+          MenuItemType        #Action
+          MenuItemName        #RetailDlvModeExploderJobScheduler
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Synchronize online orders
+          MenuItemType        #Action
+          MenuItemName        #RetailSyncOrdersJobScheduler
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Send email receipts
+          MenuItemType        #Action
+          MenuItemName        #RetailEmailReceiptSender
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Send email notification
+          MenuItemType        #Action
+          MenuItemName        #RetailEventNotificationProcessor
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Create customers from async mode
+          MenuItemType        #Action
+          MenuItemName        #RetailAsyncCustomerCreator
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Retail POS redeployment
+          MenuItemName        #retailredeploySelectStores
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Update time zone information
+          MenuItemType        #Action
+          MenuItemName        #RetailTimeZoneInfoJobScheduler
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Export SAT contingency files
+          MenuItemType        #Action
+          MenuItemName        #EFRExportContingencyFile_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@RET4040104
+        PROPERTIES
+          Name                #DataDistribution
+          Label               #@RET4040104
+          ConfigurationKey    #RetailScheduler
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Distribution schedule
+            MenuItemName        #RetailCDXSchedule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Process status messages
+            MenuItemType        #Action
+            MenuItemName        #RetailCDXScheduleMonDataSync
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Delete messages
+            MenuItemType        #Action
+            MenuItemName        #RetailConnSCMonPurgeMessage
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Upload Sessions Cleaner
+            MenuItemType        #Action
+            MenuItemName        #AAX_RetailUploadSessionCleaner
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Download Sessions Cleaner
+            MenuItemType        #Action
+            MenuItemName        #AAX_RetailDownloadSessionCleaner
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET5266
+        PROPERTIES
+          Name                #POSSales
+          Label               #@RET5266
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Post inventory
+            MenuItemType        #Action
+            MenuItemName        #RetailTransactionSalesTransMark_Multi
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Calculate statement
+            MenuItemType        #Action
+            MenuItemName        #RetailStatementCalculate_Multi
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Post statement
+            MenuItemType        #Action
+            MenuItemName        #RetailStatementPost_Multi
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYP4880731
+        PROPERTIES
+          Name                #GiftCards
+          Label               #@SYP4880731
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Update expired gift card status
+            MenuItemType        #Action
+            MenuItemName        #RetailGiftCardExpiration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Close expired gift cards
+            MenuItemType        #Action
+            MenuItemName        #RetailGiftCardClosing
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET4355
+        PROPERTIES
+          Name                #LoyaltyPeriodic
+          Label               #@RET4355
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Process loyalty schemes
+            MenuItemType        #Action
+            MenuItemName        #RetailLoyaltySchemeExploderJobScheduler
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Post earned points in batches
+            MenuItemType        #Action
+            MenuItemName        #RetailLoyaltyProcessOfflineTransactions
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Update loyalty card tiers
+            MenuItemType        #Action
+            MenuItemName        #RetailUpdateLoyaltyCardTiersJobScheduler
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET260047
+        PROPERTIES
+          Name                #Barcodesandlabels
+          Label               #@RET260047
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Print shelf labels
+            MenuItemName        #RetailInventItemLabelPrinting_Shelf
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Print product labels
+            MenuItemName        #RetailInventItemLabelPrinting_Item
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Price label journal
+            MenuItemName        #RetailLabelChangeJournalTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333879
+      PROPERTIES
+        Name                #JournalsMenu
+        Label               #@SYS333879
+        NormalImage         #3475
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Open statements
+          MenuItemName        #RetailStatementListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333860
+      PROPERTIES
+        Name                #ReportsMenu
+        Label               #@SYS333860
+        NormalImage         #3477
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Retail store metrics
+          MenuItemType        #Output
+          MenuItemName        #RetailStoreMetrics
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Sales performance by products
+          MenuItemType        #Output
+          MenuItemName        #RetailSalesPerFormanceByProduct
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Sales performance by retail product category
+          MenuItemType        #Output
+          MenuItemName        #retailsalesbyretailCategory
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Gross margin return on inventory investment (GMROII) by products
+          MenuItemType        #Output
+          MenuItemName        #RetailGMROIIByProducts
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Gross margin return on inventory investment (GMROII) by category
+          MenuItemType        #Output
+          MenuItemName        #RetailGMROIIByCategory
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Sales performance by category by store
+          MenuItemType        #Output
+          MenuItemName        #RetailSalesByCategoryByStore
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Performance by terminal
+          MenuItemType        #Output
+          MenuItemName        #RetailSalesByTerminal
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Top 10 OU performers in current year
+          MenuItemType        #Output
+          MenuItemName        #RetailTop10Stores
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Trend by operating unit
+          MenuItemType        #Output
+          MenuItemName        #RetailTrendByChannel
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Sales comparison year over year by operating unit
+          MenuItemType        #Output
+          MenuItemName        #RetailYoYByChannel
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Catalog area analysis
+          MenuItemType        #Output
+          MenuItemName        #MCRCatalogAreaAnalysis
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333869
+      PROPERTIES
+        Name                #Setupmenu
+        Label               #@SYS333869
+        NormalImage         #3478
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Online store setup checklist
+          MenuItemName        #RetailCheckList_OnlineStoreSetup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Return locations
+          MenuItemName        #RetailReturnPolicy
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Info codes
+          MenuItemName        #RetailInfocodeTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Info code groups
+          MenuItemName        #RetailInfocodeGroup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Retail workflows
+          MenuItemName        #WorkflowConfigurationRetail
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Store locator groups
+          MenuItemName        #RetailStoreLocatorGroup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Store product attributes
+          MenuItemName        #RetailInternalOrganization
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #SAT hardware
+          MenuItemName        #EFRSatHardware_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Card processors
+          MenuItemName        #CardProcessor_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Authority for fiscal printer
+          MenuItemName        #RetailFiscalAuditingAuthority_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS28007
+        PROPERTIES
+          Name                #Parameters
+          Label               #@SYS28007
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Retail parameters
+            MenuItemName        #RetailParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retail scheduler parameters
+            MenuItemName        #RetailConnParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retail shared parameters
+            MenuItemName        #RetailSharedParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retail Email notification profile
+            MenuItemName        #retaileventNotificationprofile
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET2364
+        PROPERTIES
+          Name                #POSmenu
+          Label               #@RET2364
+        ENDPROPERTIES
+        
+        MENU #@RET3287
+          PROPERTIES
+            Name                #ProfilesSubmenu
+            Label               #@RET3287
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Fiscal printer configurations
+              MenuItemName        #RetailConfiguration_BR
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Offline profiles
+              MenuItemName        #RetailOfflineProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Functionality profiles
+              MenuItemName        #RetailFunctionalityProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Receipt profiles
+              MenuItemName        #RetailReceiptProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Hardware profiles
+              MenuItemName        #RetailHardwareProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Visual profiles
+              MenuItemName        #RetailVisualProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Custom fields
+              MenuItemName        #RetailTerminalCustomField
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Language text
+              MenuItemName        #RetailLanguageText
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Fiscal register configurations
+              MenuItemName        #RetailFiscalPrinterConfigTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #POS registers
+            MenuItemName        #RetailTerminalListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Receipt formats
+            MenuItemName        #RetailFormLayout
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Screen layouts
+            MenuItemName        #RetailTillLayout
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Button grids
+            MenuItemName        #RetailButtonGrid
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Images
+            MenuItemName        #RetailImages
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Keyboard mapping groups
+            MenuItemName        #RetailKeyboardMappingTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Operations
+            MenuItemName        #RetailOperations
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Permission groups
+            MenuItemName        #RetailPosPermissionGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #Devices
+          MenuItemName        #RetailDevices
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS134272
+        PROPERTIES
+          Name                #Categories
+          Label               #@SYS134272
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Retail product hierarchy
+            MenuItemName        #RetailCategoryManagement
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Supplemental retail hierarchies
+            MenuItemName        #RetailCategorySpecialManagement
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retail channel navigation hierarchies
+            MenuItemName        #RetailNavigationHierarchyManagement
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET3117
+        PROPERTIES
+          Name                #VariantGroups
+          Label               #@RET3117
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Sizes
+            MenuItemName        #RetailEcoResSize
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Size groups
+            MenuItemName        #RetailSizeGroupTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Colors
+            MenuItemName        #RetailEcoResColor
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Color groups
+            MenuItemName        #RetailColorGroupTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Styles
+            MenuItemName        #RetailEcoResStyle
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Style groups
+            MenuItemName        #RetailStyleGroupTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET260048
+        PROPERTIES
+          Name                #ProductOrderCreation
+          Label               #@RET260048
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Vendor sales price margin setup
+            MenuItemName        #RetailVendorSalesPriceMarginSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Vendor sales price point setup
+            MenuItemName        #RetailVendorSalesPricePointSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Vendor's product numbers
+            MenuItemName        #RetailCustVendExternalItem_Vend
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET260045
+        PROPERTIES
+          Name                #PricingnadDiscounts
+          Label               #@RET260045
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Affiliations
+            MenuItemName        #RetailAffiliations
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Pricing priorities
+            MenuItemName        #RetailPricingPriorityTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Price groups
+            MenuItemName        #RetailPriceDiscGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Mix and match line groups
+            MenuItemName        #RetailMixAndMatchLineGroups
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Mix and match line group setup
+            MenuItemName        #RetailMixAndMatchLineGroupSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Discount periods
+            MenuItemName        #RetailDiscountValidationPeriod
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Rounding method group
+            MenuItemName        #RetailRoundingMethodGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Price point groups
+            MenuItemName        #RetailSalesPricePointGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET260047
+        PROPERTIES
+          Name                #Barcodesnadlabels
+          Label               #@RET260047
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Bar codes
+            MenuItemName        #InventItemBarcode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Mask characters
+            MenuItemName        #RetailBarcodeMaskCharacter
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Bar code mask setup
+            MenuItemName        #RetailBarcodeMaskSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Bar code setup
+            MenuItemName        #RetailBarcodeSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Product label reports
+            MenuItemName        #RetailInventItemLabelReportSetup_Item
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Shelf label reports
+            MenuItemName        #RetailInventItemLabelReportSetup_Shelf
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET5098
+        PROPERTIES
+          Name                #SalesTaxes
+          Label               #@RET5098
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Sales tax override groups
+            MenuItemName        #RetailTaxOverrideGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Sales tax overrides
+            MenuItemName        #RetailTaxOverrideCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333949
+        PROPERTIES
+          Name                #Charges
+          Label               #@SYS333949
+          ConfigurationKey    #Retail
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Charge codes
+            MenuItemName        #MarkupTable_Delivery
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Delivery charges groups
+            MenuItemName        #MarkupGroup_Delivery
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Auto charges
+            MenuItemName        #MarkupAutoSetup_Delivery
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET3276
+        PROPERTIES
+          Name                #TenderTypes
+          Label               #@RET3276
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Card numbers
+            MenuItemName        #RetailTenderTypeCardNumbers
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Card types
+            MenuItemName        #RetailTenderTypeCardTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Payment methods
+            MenuItemName        #RetailTenderTypeTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET5005
+        PROPERTIES
+          Name                #ReplenishmentSubmenu
+          Label               #@RET5005
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Product packages
+            MenuItemName        #RetailPackage
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Replenishment rules
+            MenuItemName        #RetailReplenishmentRuleTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Service categories
+            MenuItemName        #RetailServiceCategory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET276
+        PROPERTIES
+          Name                #RetailScheduler
+          Label               #@RET276
+          ConfigurationKey    #RetailScheduler
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Scheduler jobs
+            MenuItemName        #RetailConnSchedulerJobTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Scheduler subjobs
+            MenuItemName        #RetailConnSchedulerSubjobTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retail channel schema
+            MenuItemName        #RetailConnChannelSchema
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@RET4040103
+          PROPERTIES
+            Name                #StoreIntegration
+            Label               #@RET4040103
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Real-time Service profiles
+              MenuItemName        #RetailTransactionServiceProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Working folders
+              MenuItemName        #RetailCDXFileStorageProvider
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Channel data group
+              MenuItemName        #RetailCDXDataGroup
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Channel database
+              MenuItemName        #RetailCDXDataStore
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Async Server profile
+              MenuItemName        #RetailCDXSchedulerInterval
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Channel profiles
+              MenuItemName        #RetailChannelProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Async Server (previous version) upload options
+              MenuItemName        #RetailConnStoreConnectUploadOptions
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Async Server (previous version) profile
+              MenuItemName        #RetailConnStoreConnectProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #AOS profiles
+              MenuItemName        #RetailConnAOSProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@REX4160096
+        PROPERTIES
+          Name                #RetailDeployment
+          Label               #@REX4160096
+          ConfigurationKey    #Retail
+        ENDPROPERTIES
+        
+        MENU #@SYP4910107
+          PROPERTIES
+            Name                #Security
+            Label               #@SYP4910107
+            ConfigurationKey    #Retail
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Retail deployment certificates
+              MenuItemName        #retaildeploymentcertificates
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Retail deployment credentials
+              MenuItemName        #retaildeploymentcredentials
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Retail deployment log shares
+              MenuItemName        #retaildeploymentlogShares
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Retail deployment visualizer
+            MenuItemName        #RetailDeploymentHierarchyViewer
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@REX4160098
+          PROPERTIES
+            Name                #RetailDeploymentProfiles
+            Label               #@REX4160098
+            ConfigurationKey    #Retail
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Channel database deployment
+              MenuItemName        #RetailDeploymentChannelDatabaseProfiles
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Real-time Service deployment
+              MenuItemName        #retaildeploymentrtSProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Async Client deployment
+              MenuItemName        #RetailDeploymentCDXSynchClientProfiles
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Async Server deployment
+              MenuItemName        #RetailDeploymentCDXSynchHQProfiles
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Retail POS deployment
+              MenuItemName        #retaildeploymentregisterProfiles
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Modern POS deployment
+              MenuItemName        #retaildeploymentmodernPOSProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Retail Server deployment
+              MenuItemName        #retaildeploymentretailServerProfiles
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Business Connector deployment profile
+              MenuItemName        #RetailDeploymentBusinessConnectorProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Retail Hardware Station deployment
+              MenuItemName        #RetailDeploymentHardwareStationProfile
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@REX4160104
+          PROPERTIES
+            Name                #RetailDeploymentMachineInformation
+            Label               #@REX4160104
+            ConfigurationKey    #Retail
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Computers
+              MenuItemName        #RetailDeploymentMachines
+              IsDisplayedInContentArea    #Yes
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Retail computer clusters
+              MenuItemName        #retaildeploymentmachineclusters
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYP4880731
+        PROPERTIES
+          Name                #GiftCards
+          Label               #@SYP4880731
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Default policies
+            MenuItemName        #RetailGiftCardDefaultPolicies
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Policy sets
+            MenuItemName        #RetailGiftCardPolicySet
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@RET4355
+        PROPERTIES
+          Name                #Loyalty
+          Label               #@RET4355
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Date intervals
+            MenuItemName        #RetailPeriodCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Loyalty programs
+            MenuItemName        #RetailLoyaltyPrograms
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Loyalty reward points
+            MenuItemName        #RetailLoyaltyRewardPoints
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Resolve conflict cards
+            MenuItemName        #RetailloyaltyConflictCard
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333191
+        PROPERTIES
+          Name                #Sitesservices
+          Label               #@SYS333191
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Available solutions
+            MenuItemName        #RetailSitesAvailableSolution
+            Parameters          #SitesService.Retail
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Discover solutions
+            MenuItemName        #RetailSitesSolutionDiscovery
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Online pages
+            MenuItemName        #RetailSitesCreatePage
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #Channel reports configuration
+          MenuItemName        #RetailChannelReportConfig
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+  ENDMENU
+  
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_RetailDownloadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_RetailDownloadSessionCleaner
+    Type: 3
+    PROPERTIES
+      Name                #AAX_RetailDownloadSessionCleaner
+      Label               #Download Sessions Cleaner
+      HelpText            #Delete Download Sessions No Longer Needed
+      ObjectType          #Class
+      Object              #AAX_RetailDownloadSessionCleaner
+      Origin              #{CF9C6C4F-D4BD-4C0D-804C-4D293B698E25}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_RetailUploadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_RetailUploadSessionCleaner
+    Type: 3
+    PROPERTIES
+      Name                #AAX_RetailUploadSessionCleaner
+      Label               #Upload Sessions Cleaner
+      HelpText            #Delete Upload Sessions No Longer Needed
+      ObjectType          #Class
+      Object              #AAX_RetailUploadSessionCleaner
+      Origin              #{1DB45846-236C-4700-A499-AC1F1C908561}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : AAX_RetailCleanup unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #AAX_RetailCleanup
+  SHARED
+  PROPERTIES
+    Name                #AAX_RetailCleanup
+    Origin              #{5847D74C-28CA-46FF-8017-6CD798D0DE5F}
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    GROUP #DataDictionary
+      PROPERTIES
+        Name                #DataDictionary
+        ProjectGroupType    #DataDictionary
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #Tables
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Maps
+        PROPERTIES
+          Name                #Maps
+          ProjectGroupType    #Maps
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Views
+        PROPERTIES
+          Name                #Views
+          ProjectGroupType    #Views
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #ExtendedDataTypes
+        PROPERTIES
+          Name                #ExtendedDataTypes
+          ProjectGroupType    #ExtendedDataTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #BaseEnums
+        PROPERTIES
+          Name                #BaseEnums
+          ProjectGroupType    #BaseEnums
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #LicenseCodes
+        PROPERTIES
+          Name                #LicenseCodes
+          ProjectGroupType    #LicenseCodes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #ConfigurationKeys
+        PROPERTIES
+          Name                #ConfigurationKeys
+          ProjectGroupType    #ConfigurationKeys
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #SecurityKeys
+        PROPERTIES
+          Name                #SecurityKeys
+          ProjectGroupType    #SecurityKeys
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #TableCollections
+        PROPERTIES
+          Name                #TableCollections
+          ProjectGroupType    #TableCollections
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Perspectives
+        PROPERTIES
+          Name                #Perspectives
+          ProjectGroupType    #Perspectives
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Macros
+      PROPERTIES
+        Name                #Macros
+        ProjectGroupType    #Macros
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Classes
+      PROPERTIES
+        Name                #Classes
+        ProjectGroupType    #Classes
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 1026238
+        NODETYPE 329
+        NAME #AAX_RetailDownloadSessionCleaner
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 1026239
+        NODETYPE 329
+        NAME #AAX_RetailUploadSessionCleaner
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #Forms
+      PROPERTIES
+        Name                #Forms
+        ProjectGroupType    #Forms
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Parts
+      PROPERTIES
+        Name                #Parts
+        ProjectGroupType    #Parts
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Info Parts
+        PROPERTIES
+          Name                #Info Parts
+          ProjectGroupType    #InfoParts
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Form Parts
+        PROPERTIES
+          Name                #Form Parts
+          ProjectGroupType    #FormParts
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Cues
+        PROPERTIES
+          Name                #Cues
+          ProjectGroupType    #Cues
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Cue Groups
+        PROPERTIES
+          Name                #Cue Groups
+          ProjectGroupType    #CueGroups
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #DataSets
+      PROPERTIES
+        Name                #DataSets
+        ProjectGroupType    #DataSets
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #SSRS Reports
+      PROPERTIES
+        Name                #SSRS Reports
+        ProjectGroupType    #SSRSReports
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Reports
+        PROPERTIES
+          Name                #Reports
+          ProjectGroupType    #Reports
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Style Templates
+        PROPERTIES
+          Name                #Report Style Templates
+          ProjectGroupType    #ReportStyleTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Datasources
+        PROPERTIES
+          Name                #Report Datasources
+          ProjectGroupType    #ReportDataSources
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Report Images
+        PROPERTIES
+          Name                #Report Images
+          ProjectGroupType    #ReportImages
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Reports
+      PROPERTIES
+        Name                #Reports
+        ProjectGroupType    #Reports
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #ReportTemplates
+        PROPERTIES
+          Name                #ReportTemplates
+          ProjectGroupType    #ReportTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #SectionTemplates
+        PROPERTIES
+          Name                #SectionTemplates
+          ProjectGroupType    #ReportSectionTemplates
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Visual Studio Projects
+      PROPERTIES
+        Name                #Visual Studio Projects
+        ProjectGroupType    #VisualStudioAXModelProjects
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Analysis Services Projects
+        PROPERTIES
+          Name                #Analysis Services Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Web Application Projects
+        PROPERTIES
+          Name                #Web Application Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Visual Basic Projects
+        PROPERTIES
+          Name                #Visual Basic Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #C Sharp Projects
+        PROPERTIES
+          Name                #C Sharp Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Dynamics AX Model Projects
+        PROPERTIES
+          Name                #Dynamics AX Model Projects
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #ReportLibraries
+      PROPERTIES
+        Name                #ReportLibraries
+        ProjectGroupType    #ReportLibraries
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Queries
+      PROPERTIES
+        Name                #Queries
+        ProjectGroupType    #Queries
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 20
+        UTILOBJECTID 0
+        NODETYPE 330
+        NAME #AAX_RetailCDXDownloadSessionCleanup
+      ENDNODE
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 20
+        UTILOBJECTID 0
+        NODETYPE 330
+        NAME #AAX_RetailCDXUploadSessionCleanup
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #Jobs
+      PROPERTIES
+        Name                #Jobs
+        ProjectGroupType    #Jobs
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Menus
+      PROPERTIES
+        Name                #Menus
+        ProjectGroupType    #Menus
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 16
+        UTILOBJECTID 0
+        NODETYPE 205
+        NAME #RetailMain
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #MenuItems
+      PROPERTIES
+        Name                #MenuItems
+        ProjectGroupType    #MenuItems
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Display
+        PROPERTIES
+          Name                #Display
+          ProjectGroupType    #Display
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Output
+        PROPERTIES
+          Name                #Output
+          ProjectGroupType    #Output
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Action
+        PROPERTIES
+          Name                #Action
+          ProjectGroupType    #Action
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 3
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #AAX_RetailDownloadSessionCleaner
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 3
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #AAX_RetailUploadSessionCleaner
+        ENDNODE
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Web
+      PROPERTIES
+        Name                #Web
+        ProjectGroupType    #Web
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #WebForms
+        PROPERTIES
+          Name                #WebForms
+          ProjectGroupType    #WebForms
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebReports
+        PROPERTIES
+          Name                #WebReports
+          ProjectGroupType    #
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebMenuItems
+        PROPERTIES
+          Name                #WebMenuItems
+          ProjectGroupType    #WebMenuItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #URLs
+          PROPERTIES
+            Name                #URLs
+            ProjectGroupType    #WebUrlMenuItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Actions
+          PROPERTIES
+            Name                #Actions
+            ProjectGroupType    #WebActionMenuItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #WebContent
+        PROPERTIES
+          Name                #WebContent
+          ProjectGroupType    #WebContentItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #Display
+          PROPERTIES
+            Name                #Display
+            ProjectGroupType    #WebDisplayContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Output
+          PROPERTIES
+            Name                #Output
+            ProjectGroupType    #WebOutputContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #Managed
+          PROPERTIES
+            Name                #Managed
+            ProjectGroupType    #WebManagedContentItems
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #WebMenus
+        PROPERTIES
+          Name                #WebMenus
+          ProjectGroupType    #WebMenus
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebFiles
+        PROPERTIES
+          Name                #WebFiles
+          ProjectGroupType    #WebFiles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        GROUP #WebParts
+          PROPERTIES
+            Name                #WebParts
+            ProjectGroupType    #WebWebParts
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #SiteDefinitions
+          PROPERTIES
+            Name                #SiteDefinitions
+            ProjectGroupType    #WebSiteDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #SiteTemplates
+          PROPERTIES
+            Name                #SiteTemplates
+            ProjectGroupType    #WebSiteTemps
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #PageDefinitions
+          PROPERTIES
+            Name                #PageDefinitions
+            ProjectGroupType    #WebPageDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #ListDefinitions
+          PROPERTIES
+            Name                #ListDefinitions
+            ProjectGroupType    #WebListDefs
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #StaticFiles
+          PROPERTIES
+            Name                #StaticFiles
+            ProjectGroupType    #WebStaticFiles
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        GROUP #WebControls
+          PROPERTIES
+            Name                #WebControls
+            ProjectGroupType    #WebControls
+            GroupMask           #
+            PreventEditProperties #No
+          ENDPROPERTIES
+          
+          ENDGROUP
+          
+        ENDGROUP
+        
+      GROUP #Weblets
+        PROPERTIES
+          Name                #Weblets
+          ProjectGroupType    #WebletItems
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #WebModules
+        PROPERTIES
+          Name                #WebModules
+          ProjectGroupType    #WebModules
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Services
+      PROPERTIES
+        Name                #Services
+        ProjectGroupType    #Services
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Service Groups
+      PROPERTIES
+        Name                #Service Groups
+        ProjectGroupType    #ServiceGroups
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Workflow
+      PROPERTIES
+        Name                #Workflow
+        ProjectGroupType    #Workflow
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #WorkflowCategories
+        PROPERTIES
+          Name                #WorkflowCategories
+          ProjectGroupType    #WorkflowCategories
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Approvals
+        PROPERTIES
+          Name                #Approvals
+          ProjectGroupType    #WorkflowApprovals
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Tasks
+        PROPERTIES
+          Name                #Tasks
+          ProjectGroupType    #WorkflowTasks
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Automated Tasks
+        PROPERTIES
+          Name                #Automated Tasks
+          ProjectGroupType    #WorkflowAutomatedTasks
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Workflow Types
+        PROPERTIES
+          Name                #Workflow Types
+          ProjectGroupType    #WorkflowTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Providers
+        PROPERTIES
+          Name                #Providers
+          ProjectGroupType    #WorkflowProviders
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Security
+      PROPERTIES
+        Name                #Security
+        ProjectGroupType    #Security
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Code Permissions
+        PROPERTIES
+          Name                #Code Permissions
+          ProjectGroupType    #SecurityCodePermissions
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Privileges
+        PROPERTIES
+          Name                #Privileges
+          ProjectGroupType    #SecurityPrivileges
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Duties
+        PROPERTIES
+          Name                #Duties
+          ProjectGroupType    #SecurityDuties
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Roles
+        PROPERTIES
+          Name                #Roles
+          ProjectGroupType    #SecurityRoles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Process Cycles
+        PROPERTIES
+          Name                #Process Cycles
+          ProjectGroupType    #SecurityProcessCycles
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Policies
+        PROPERTIES
+          Name                #Policies
+          ProjectGroupType    #SecurityPolicies
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Label Files
+      PROPERTIES
+        Name                #Label Files
+        ProjectGroupType    #LabelFiles
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Resources
+      PROPERTIES
+        Name                #Resources
+        ProjectGroupType    #Resources
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #References
+      PROPERTIES
+        Name                #References
+        ProjectGroupType    #References
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #Help Document Sets
+      PROPERTIES
+        Name                #Help Document Sets
+        ProjectGroupType    #HelpDocumentSets
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #System Documentation
+      PROPERTIES
+        Name                #System Documentation
+        ProjectGroupType    #All
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Reserved Words
+        PROPERTIES
+          Name                #Reserved Words
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Function
+        PROPERTIES
+          Name                #Function
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Types
+        PROPERTIES
+          Name                #Types
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Enums
+        PROPERTIES
+          Name                #Enums
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      GROUP #Classes
+        PROPERTIES
+          Name                #Classes
+          ProjectGroupType    #VisualStudioProjects
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        ENDGROUP
+        
+      ENDGROUP
+      
+  ENDPROJECT
+  
+
+***Element: END
